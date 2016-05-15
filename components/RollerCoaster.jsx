@@ -36,16 +36,11 @@ var chartOptions = {
 export default class RollerCoaster extends React.Component {
   constructor() {
     super()
-  }
-
-  render() {
     const xs = chartData.labels
     const ys_data = chartData.datasets[0].data
-    const ys_user = chartData.datasets[1].data
     for (let i = 0; i < 749; i++) {
       xs.push(i);
       ys_data.push(1.2);
-      ys_user.push(0.6)
     }
     for (let i = 0; i < 40; i++) {
       let x = Math.floor(Math.random() * 740)
@@ -53,6 +48,10 @@ export default class RollerCoaster extends React.Component {
       ys_data[x+1] = y
       ys_data[x] = y
     }
+  }
+
+  render() {
+    chartData.datasets[1].data = this.props.userLog
     return(
     	 <LineChart data={chartData} options={chartOptions} width="640" height="50"/>
     )
