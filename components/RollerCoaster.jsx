@@ -52,9 +52,7 @@ export default class RollerCoaster extends React.Component {
 
   render() {
     const opacity = 0.2 + Math.min(this.props.afterPaused, 10) / 11
-    console.log(opacity)
     chartData.datasets[1].fillColor = `rgba(63, 20, 24, ${opacity})`
-    console.log(chartData.datasets[1].fillColor)
     chartData.datasets[1].data = this.props.userLog
     return(
     	 <LineChart

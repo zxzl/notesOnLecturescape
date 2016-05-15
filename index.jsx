@@ -17,6 +17,7 @@ class App extends React.Component {
 			userLog: new Array(749).fill(0.1),
 			isPaused: false,
 			afterPaused: 0,
+			lastPos: 0,
     };
 
     this.onReady = this.onReady.bind(this);
@@ -34,9 +35,17 @@ class App extends React.Component {
 			() => {
 				const pos = Math.floor(this.state.player.getCurrentTime())
 				console.log(pos + ' ' + this.state.afterPaused)
+				// check paused
+				const newY = this.state.isPaused ? 1.1 : Math.max(this.state.userLog[pos], 0.4)
+				let newUserLog = update(this.state.userLog, {[pos]: {$set: newY}})
+				// check jumped
+				if (Math.abs(this.state.lastPos - pos) > 1 )
+					newUserLog = update(newUserLog, {[this.state.lastPos]: {$set: 1.1}})
+
 				this.setState({
+					lastPos: pos,
 					afterPaused: this.state.isPaused ? this.state.afterPaused + 1 : this.state.afterPaused,
-					userLog: update(this.state.userLog, {[pos]: {$set: 0.4}}),
+					userLog: newUserLog,
 				})
 			},
 			1000
