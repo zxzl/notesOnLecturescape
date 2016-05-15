@@ -12,7 +12,7 @@ var chartData = {
         },
         {
           strokeColor: "rgba(79, 159, 163, 0)",
-          fillColor: "rgba(209, 61, 55, 0.2)",
+          fillColor: "rgba(209, 61, 55, 1)",
           data: [],
         }
     ]
@@ -51,9 +51,19 @@ export default class RollerCoaster extends React.Component {
   }
 
   render() {
+    const opacity = 0.2 + Math.min(this.props.afterPaused, 10) / 11
+    console.log(opacity)
+    chartData.datasets[1].fillColor = `rgba(63, 20, 24, ${opacity})`
+    console.log(chartData.datasets[1].fillColor)
     chartData.datasets[1].data = this.props.userLog
     return(
-    	 <LineChart data={chartData} options={chartOptions} width="640" height="50"/>
+    	 <LineChart
+        data={chartData}
+        options={chartOptions}
+        width="640"
+        height="50"
+        redraw
+      />
     )
   }
 }

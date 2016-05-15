@@ -15,7 +15,8 @@ class App extends React.Component {
       videoId: "ls7Ke48jCt8",
       player: null,
 			userLog: new Array(749).fill(0.1),
-			paused: 0,
+			isPaused: false,
+			afterPaused: 0,
     };
 
     this.onReady = this.onReady.bind(this);
@@ -32,9 +33,10 @@ class App extends React.Component {
 		TimerMixin.setInterval(
 			() => {
 				const pos = Math.floor(this.state.player.getCurrentTime())
-				console.log(pos)
+				console.log(pos + ' ' + this.state.afterPaused)
 				this.setState({
-					userLog: update(this.state.userLog, {[pos]: {$set: 0.3}})
+					afterPaused: this.state.isPaused ? this.state.afterPaused + 1 : this.state.afterPaused,
+					userLog: update(this.state.userLog, {[pos]: {$set: 0.4}}),
 				})
 			},
 			1000
@@ -42,11 +44,14 @@ class App extends React.Component {
   }
 
   onPlayVideo() {
-    this.state.player.playVideo();
+    this.setState({
+			isPaused: false,
+			afterPaused: 0,
+		})
   }
 
   onPauseVideo() {
-    this.state.player.pauseVideo();
+    this.setState({ isPaused: true })
   }
 
   onChangeVideo() {
@@ -60,9 +65,13 @@ class App extends React.Component {
       <div>
         <YouTube
 					videoId={this.state.videoId}
-					onReady={this.onReady} />
+					onReady={this.onReady}
+					onPlay={this.onPlayVideo}
+					onPause={this.onPauseVideo}
+				/>
 				<RollerCoaster
 					userLog={this.state.userLog}
+					afterPaused={this.state.afterPaused}
 				/>
       </div>
     );
