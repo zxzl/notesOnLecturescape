@@ -1,46 +1,70 @@
-# react-webpack-babel
-Simple React Webpack Babel Starter Kit
+# Notes on *Lecturescape*
 
+### Main idea of interface
 
-This is a simple [React](https://facebook.github.io/react/), [Webpack](http://webpack.github.io/) and [Babel](https://babeljs.io/) application with nothing else in it.
+> We have user interaction logs at server, so let's exploit it (with transcript) in building interfaces that can leverage learning experience!
 
-### What's in it?
+##### Key features
 
-Just a simple [index.jsx](./index.jsx), [webpack.config.js](./webpack.config.js) and [index.html](./public/index.html) file.
+- 2D timeline
 
-### To run
+  > Navigation events: when user pauses, resumes, navigates
 
-* You'll need to have [git](https://git-scm.com/) and [node](https://nodejs.org/en/) installed in your system.
-* Fork and clone the project:
+  - *Interaction peak* 
+  - *Phantom Cursor* 
+  - Personal watching trace visualisation
 
-```
-> $ git clone https://github.com/alicoding/react-webpack-babel.git
-```
+- Enhanced in-video search
 
-Then install the dependencies:
+  - Keyword search
+    - Rank each occurence of keywords according to learners' watch count
+    - Search timeline
+  - Word cloud
 
-```
-> $ npm install
-```
+- Visual Highlights
 
-Install webpack and the development server:
+  - Interaction peak highlights
+  - Pinning video frames
+  - Personal bookmarks
 
-```
-> $ npm i webpack-dev-server webpack -g
-```
+##### Evaluation
 
-You can simply run webpack build using this command: 
+- Research questions & findings
+  - How do learners navigate lecture videos while performing seach or summarization
+    - V. Neither positive nor adversal effect
+    - P. Some *Lecutrescape* users preferred interaction peak to keyword search, but there was no meaningful performance gain
+    - S. *Lecturescape* users finished task quickly
+    - Meanwhile, *Lecutrescape* users felt they performed better
+  - How do learners interpret interaction data
+    - positive feedbacks
+    - classroom-y, useful, easy to understand
+    - 'peak' means...
+      - confusing, important, complex
+      - not matching with individual's familiarity with topic
+  - Are those features useful and learnable?
+    - 2 stage: *overview* & *focus*
+    - With *lecturescape*, users jumped with more confidence
+- Tasks
+  - **V**isual search: finding a specfic point of lecture corresponding to visual cue
+  - **P**roblem search: finding an answer to given problem
+  - **S**ummarization: writing down main points
 
-```
-> $ npm run build
-```
+### Advantages / disadvantages of interface
 
-If you want to run with webpack-dev-server simply run this command: 
+##### pros
 
-```
-> $ npm run dev
-```
+- additional informations that aid learning - a comment about word cloud
+- linear lecture sequences can be re-organized using search feature
 
-Open the web browser to `http://localhost:8080/`
+##### cons
 
-Please contribute to the project if you think this can be done better in anyway even for this README :)
+1. Curious about 3rd design requirements - Is algorithm always picks readable 'slide'?
+2. Peaks in 2d timeline might be misunderstood as importance of content
+   - Especially if in production, users won't carefully read description about it
+
+### Improvements
+
+- (In addition to personal timeline visualization) visualize pause history in order to warn learners who are easily distracted
+- (Regarding cons1) use OCR to check whether a frame consists readable contents(saw in one of references, but I cannot point it). Plus, giving more weight to slides with codes or formulas will be great in engineering MOOC
+- (Regarding cons2) design personal watching traces similar to rollercoaster timeline to help users understand the meaning of *peaks* better
+- (Less relevant with interaction log) Add functionality to group slides at highlight storyboard(like drag & drop when organazing icons at smartphone's homescreen). Some MOOC lecturers leave important contents to be hand-written, and do not include them in slides. Helping learners capture & organize 'full' slides might leads to less pause.
