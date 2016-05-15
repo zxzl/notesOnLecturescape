@@ -10,12 +10,18 @@ export class App extends React.Component {
 		return (
 			<div>
 				Simple React + Babel + Bootstrap + Webpack
-				<Player />
-				<RollerCoaster />
-				<UserTimeline />
+				<div style={wrapperStyle}>
+					<Player />
+					<RollerCoaster />
+					<UserTimeline />
+				</div>
 			</div>
 		);
 	}
+}
+
+const wrapperStyle = {
+	width: 640,
 }
 
 ReactDOM.render(<App/>, document.querySelector("#myApp"));
