@@ -4,6 +4,7 @@ import YouTube from 'react-youtube';
 
 export default class Player extends React.Component {
   render() {
+    console.log('trying to render')
     const opts = {
       height: '390',
       width: '640',
@@ -16,10 +17,15 @@ export default class Player extends React.Component {
       <YouTube
         videoId="ls7Ke48jCt8"
         opts={opts}
+        onPlay={this.props.onPlay}
         onReady={this._onReady}
-        onPause={this._onPause}
+        onPause={this.props.onPause}
       />
     );
+  }
+
+  shouldComponentUpdate() {
+    return false
   }
 
   _onReady(event) {
