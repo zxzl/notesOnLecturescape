@@ -8,13 +8,9 @@ import UserTimeline from './components/UserTimeline.jsx';
 export class App extends React.Component {
 	render() {
 		return (
-			<div>
-				Simple React + Babel + Bootstrap + Webpack
-				<div style={wrapperStyle}>
-					<Player />
-					<RollerCoaster />
-					<UserTimeline />
-				</div>
+			<div style={wrapperStyle}>
+				<RollerCoaster />
+				<UserTimeline />
 			</div>
 		);
 	}
